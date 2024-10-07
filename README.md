@@ -1,87 +1,76 @@
-# eslint-config-airbnb
+# 团队通用 Eslint 配置
+为了统一团队代码风格，将 Eslint 配置封装到一起，提供开箱即用的配置。对于JS代码，提供 airbnb 风格配置。此外，还提供 Raect，Vue，TS 代码的 Eslint 配置。
 
-[![npm version](https://badge.fury.io/js/eslint-config-airbnb.svg)](https://badge.fury.io/js/eslint-config-airbnb)
+## 安装
+```bash
+npm i eslint-config-team-generic
+```
 
-This package provides Airbnb's .eslintrc as an extensible shared config.
+## 使用
+该配置依赖了其他一些插件，在实际项目中需要将其安装为开发依赖，通过以下命令查看所有对等依赖
 
-## Usage
+```bash
+npm info "eslint-config-team-generic" peerDependencies
+```
+### 添加JS代码检查
+将 `team-generic` 添加到配置文件 `.eslintrc.json` 中
 
-We export three ESLint configurations for your usage.
+```json
+{
+  "extends": [
+    "team-generic"
+  ]
+}
+```
+### 添加React代码检查
+1. 安装以下对等依赖
+```json
+{
+  "eslint-plugin-import": "^2.30.0",
+  "eslint-plugin-jsx-a11y": "^6.10.0",
+  "eslint-plugin-react": "^7.36.1",
+  "eslint-plugin-react-hooks": "^4.6.2",
+}
+```
+2. 修改配置文件
+```json
+{
+  "extends": [
+    "team-generic/react"
+  ]
+}
+```
 
-### eslint-config-airbnb
+### 添加Vue代码检查
+1. 安装以下对等依赖
+```json
+{
+  "eslint-plugin-vue": "^9.28.0",
+  "vue-eslint-parser": "^9.4.3"
+}
+```
+2. 修改配置文件
+```json
+{
+  "extends": [
+    "team-generic/vue"
+  ]
+}
+```
 
-Our default export contains most of our ESLint rules, including ECMAScript 6+ and React. It requires `eslint`, `eslint-plugin-import`, `eslint-plugin-react`, `eslint-plugin-react-hooks`, and `eslint-plugin-jsx-a11y`. Note that it does not enable our React Hooks rules. To enable those, see the [`eslint-config-airbnb/hooks` section](#eslint-config-airbnbhooks).
-
-If you don't need React, see [eslint-config-airbnb-base](https://npmjs.com/eslint-config-airbnb-base).
-
-1. Install the correct versions of each package, which are listed by the command:
-
-  ```sh
-  npm info "eslint-config-airbnb@latest" peerDependencies
-  ```
-
-  If using **npm 5+**, use this shortcut
-
-  ```sh
-  npx install-peerdeps --dev eslint-config-airbnb
-  ```
-
-  If using **yarn**, you can also use the shortcut described above if you have npm 5+ installed on your machine, as the command will detect that you are using yarn and will act accordingly.
-  Otherwise, run `npm info "eslint-config-airbnb@latest" peerDependencies` to list the peer dependencies and versions, then run `yarn add --dev <dependency>@<version>` for each listed peer dependency.
-
-  If using **npm < 5**, Linux/OSX users can run
-
-  ```sh
-  (
-    export PKG=eslint-config-airbnb;
-    npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG@latest"
-  )
-  ```
-
-  Which produces and runs a command like:
-
-  ```sh
-  npm install --save-dev eslint-config-airbnb eslint@^#.#.# eslint-plugin-jsx-a11y@^#.#.# eslint-plugin-import@^#.#.# eslint-plugin-react@^#.#.# eslint-plugin-react-hooks@^#.#.#
-  ```
-
-  If using **npm < 5**, Windows users can either install all the peer dependencies manually, or use the [install-peerdeps](https://github.com/nathanhleung/install-peerdeps) cli tool.
-
-  ```sh
-  npm install -g install-peerdeps
-  install-peerdeps --dev eslint-config-airbnb
-  ```
-  The cli will produce and run a command like:
-
-  ```sh
-  npm install --save-dev eslint-config-airbnb eslint@^#.#.# eslint-plugin-jsx-a11y@^#.#.# eslint-plugin-import@^#.#.# eslint-plugin-react@^#.#.# eslint-plugin-react-hooks@^#.#.#
-  ```
-
-2. Add `"extends": "airbnb"` to your `.eslintrc`
-
-### eslint-config-airbnb/hooks
-
-This entry point enables the linting rules for React hooks (requires v16.8+). To use, add `"extends": ["airbnb", "airbnb/hooks"]` to your `.eslintrc`.
-
-### eslint-config-airbnb/whitespace
-
-This entry point only errors on whitespace rules and sets all other rules to warnings. View the list of whitespace rules [here](https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/whitespace.js).
-
-### eslint-config-airbnb/base
-
-This entry point is deprecated. See [eslint-config-airbnb-base](https://npmjs.com/eslint-config-airbnb-base).
-
-### eslint-config-airbnb/legacy
-
-This entry point is deprecated. See [eslint-config-airbnb-base](https://npmjs.com/eslint-config-airbnb-base).
-
-See [Airbnb's JavaScript styleguide](https://github.com/airbnb/javascript) and
-the [ESlint config docs](https://eslint.org/docs/user-guide/configuring#extending-configuration-files)
-for more information.
-
-## Improving this config
-
-Consider adding test cases if you're making complicated rules changes, like anything involving regexes. Perhaps in a distant future, we could use literate programming to structure our README as test cases for our .eslintrc?
-
-You can run tests with `npm test`.
-
-You can make sure this module lints with itself using `npm run lint`.
+### 添加TS代码检查
+1. 安装以下对等依赖
+```json
+{
+  "@typescript-eslint/eslint-plugin": "^8.8.0",
+  "@typescript-eslint/parser": "^8.8.0",
+}
+```
+2. 修改配置文件
+```json
+{
+  "extends": [
+    "team-generic/ts"
+  ]
+}
+```
