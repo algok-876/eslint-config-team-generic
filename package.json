@@ -1,0 +1,87 @@
+{
+  "name": "eslint-config-team-generic",
+  "version": "1.0.0",
+  "description": "Airbnb's ESLint config, following our styleguide",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./react": "./react.js",
+    "./vue": "./vue.js",
+    "./ts": "./ts.js"
+  },
+  "scripts": {
+    "prelint": "eclint check $(git ls-files | xargs find 2> /dev/null | grep -vE 'node_modules|\\.git')",
+    "lint": "eslint .",
+    "pretests-only": "node ./test/requires",
+    "tests-only": "babel-tape-runner ./test/test-*.js",
+    "prepublishOnly": "eslint-find-rules --unused && npm test && safe-publish-latest",
+    "prepublish": "not-in-publish || npm run prepublishOnly",
+    "pretest": "npm run --silent lint",
+    "test": "npm run --silent tests-only",
+    "link:eslint": "cd node_modules/eslint && npm link --production && cd -",
+    "pretravis": "npm run link:eslint && cd ../eslint-config-airbnb-base && npm link --no-save eslint && npm install && npm link && cd - && npm link --no-save eslint-config-airbnb-base",
+    "travis": "npm run --silent tests-only",
+    "posttravis": "npm unlink --no-save eslint-config-airbnb-base eslint >/dev/null &"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airbnb/javascript"
+  },
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "config",
+    "airbnb",
+    "javascript",
+    "styleguide",
+    "es2015",
+    "es2016",
+    "es2017",
+    "es2018",
+    "eslint vue",
+    "eslint react",
+    "eslint typescript"
+  ],
+  "author": "Jake Teton-Landis (https://twitter.com/@jitl)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/airbnb/javascript/issues"
+  },
+  "dependencies": {
+    "eslint-config-airbnb-base": "^15.0.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.25.6",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "babel-preset-airbnb": "^4.5.0",
+    "babel-tape-runner": "^3.0.0",
+    "eclint": "^2.8.1",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-find-rules": "^4.1.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-react": "^7.36.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-vue": "^9.28.0",
+    "in-publish": "^2.0.1",
+    "react": ">= 0.13.0",
+    "safe-publish-latest": "^2.0.0",
+    "tape": "^5.9.0",
+    "vue-eslint-parser": "^9.4.3"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-react": "^7.36.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-vue": "^9.28.0",
+    "vue-eslint-parser": "^9.4.3"
+  },
+  "engines": {
+    "node": "^10.12.0 || ^12.22.0 || ^14.17.0 || >=16.0.0"
+  }
+}
